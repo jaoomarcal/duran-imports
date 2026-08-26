@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-onyx: #0b0b0c;
+  --color-charcoal: #1c1b19;
+  --color-cream: #f5f3ec;
+  --color-paper: #fbfaf6;
+  --color-ink: #171614;
+  --color-gold: #c8a24a;
+  --color-gold-light: #e9d29a;
+  --color-gold-dark: #8a6d1c;
+  --color-silver: #c7ccd1;
+
+  --font-display: 'Oswald', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-onyx);
+  font-family: var(--font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Signature motif: the interlocking gold/silver rings echoed from the
+   Duran Imports emblem, used as ambient background decoration. */
+.ring-motif {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1.5px solid;
+  pointer-events: none;
+}
+
+.gold-hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(180deg, #f1e0ad 0%, #c8a24a 45%, #8a6d1c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+::selection {
+  background: var(--color-gold-light);
+  color: var(--color-onyx);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
