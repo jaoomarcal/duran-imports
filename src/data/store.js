@@ -236,7 +236,7 @@ export const products = [
     price: null,
     image: elfbarIceKing,
     // ATENÇÃO: mesma observação do ElfBar Duke — ajuste os nomes reais dos sabores.
-    flavors: ["Sabor azul", "Sabor rosa/amarelo", "Sabor vermelho"],
+    flavors: ["Havaian Slush", "WildBerry", "Passion Flash"],
   },
   {
     id: "elfbar-te30k",
