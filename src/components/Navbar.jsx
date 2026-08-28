@@ -39,7 +39,7 @@ export default function Navbar() {
             <InstagramIcon size={19} />
           </a>
           <a
-            href={buildWhatsAppLink("dúvida geral sobre a loja")}
+            href={buildWhatsAppLink()}
             target="_blank"
             rel="noreferrer"
             className="hidden sm:inline-flex items-center gap-2 border border-gold/60 hover:border-gold hover:bg-gold hover:text-onyx text-gold text-sm font-semibold px-4 py-2 rounded-full transition-colors"

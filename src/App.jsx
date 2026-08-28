@@ -4,6 +4,7 @@ import Products from "./components/Products";
 import DeliveryStrip from "./components/DeliveryStrip";
 import Footer from "./components/Footer";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
+import FloatingCart from "./components/cart/FloatingCart";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <DeliveryStrip />
       <Footer />
       <FloatingWhatsApp />
+      <FloatingCart />
     </div>
   );
 }

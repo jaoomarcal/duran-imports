@@ -1,4 +1,5 @@
 import { MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import { store, buildWhatsAppLink } from "../data/store";
 import InstagramIcon from "./icons/InstagramIcon";
 
@@ -26,7 +27,7 @@ export default function Footer() {
             <InstagramIcon size={18} />
           </a>
           <a
-            href={buildWhatsAppLink("dúvida geral sobre a loja")}
+            href={buildWhatsAppLink()}
             target="_blank"
             rel="noreferrer"
             aria-label="WhatsApp"
@@ -37,8 +38,19 @@ export default function Footer() {
         </div>
       </div>
 
-      <p className="text-center text-[11px] text-cream/30 mt-8">
-        © {new Date().getFullYear()} {store.name}. Todos os direitos reservados.
+      <p className="mt-8 flex items-center justify-center gap-1.5 text-center text-[11px] text-cream/30">
+        <span>
+          © {new Date().getFullYear()} {store.name}. Todos os direitos
+          reservados.
+        </span>
+        <span aria-hidden>·</span>
+        <Link
+          to="/painel"
+          aria-label="Área restrita (painel do dono)"
+          className="-m-2 inline-flex items-center p-2 text-sm leading-none text-cream/25 transition-colors hover:text-gold"
+        >
+          •
+        </Link>
       </p>
     </footer>
   );
