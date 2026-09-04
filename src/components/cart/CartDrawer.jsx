@@ -49,7 +49,11 @@ export default function CartDrawer({ onClose }) {
       dados
     );
     if (link) {
-      window.open(link, "_blank", "noopener,noreferrer");
+      const a = document.createElement("a");
+      a.href = link;
+      a.target = "_blank";
+      a.rel = "noreferrer";
+      a.click();
       limpar();
       onClose();
     }
