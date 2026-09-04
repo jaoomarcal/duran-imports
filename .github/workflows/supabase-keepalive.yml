@@ -1,0 +1,31 @@
+name: Supabase keep-alive
+
+# Projetos gratuitos do Supabase são pausados após ~7 dias sem atividade.
+# O heartbeat do navegador (src/lib/heartbeat.js) só roda quando alguém está
+# com o site aberto. Este job garante atividade mesmo sem visitas: uma
+# consulta a cada 4 dias basta para o projeto não ser pausado (limite ~7 dias).
+#
+# Configure em: repo > Settings > Secrets and variables > Actions
+#   SUPABASE_URL       -> mesma URL do VITE_SUPABASE_URL (https://xxxx.supabase.co)
+#   SUPABASE_ANON_KEY  -> mesma chave do VITE_SUPABASE_ANON_KEY
+
+on:
+  schedule:
+    - cron: "17 6 */4 * *" # a cada 4 dias, 06:17 UTC
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consulta mínima na tabela produtos
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/produtos?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
+          echo "HTTP $code"
+          test "$code" = "200"
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}

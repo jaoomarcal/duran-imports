@@ -5,8 +5,12 @@ import { Toaster } from "sonner";
 
 import "./index.css";
 import { CartProvider } from "./context/CartContext";
+import { iniciarHeartbeat } from "./lib/heartbeat";
 import App from "./App.jsx";
 import Admin from "./pages/Admin.jsx";
+
+// Mantém o projeto Supabase ativo enquanto o site estiver aberto.
+iniciarHeartbeat();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

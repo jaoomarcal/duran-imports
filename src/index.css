@@ -65,3 +65,16 @@ body {
   outline: 2px solid var(--color-gold);
   outline-offset: 3px;
 }
+
+/* iOS Safari dá zoom automático ao focar um campo cuja fonte é menor que
+   16px. Garantimos no mínimo 16px nos controles em telas pequenas para
+   evitar o zoom ao tocar num campo de texto — sem desabilitar o
+   pinch-to-zoom manual (regra fora de @layer, então vence os utilitários
+   text-sm do Tailwind). */
+@media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}

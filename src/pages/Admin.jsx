@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { ArrowLeft, LogOut, Plus, Pencil, Trash2 } from "lucide-react";
@@ -30,7 +30,7 @@ function Login({ onEntrar }) {
   }
 
   return (
-    <div className="grid min-h-screen place-items-center bg-onyx px-4">
+    <div className="grid min-h-dvh place-items-center bg-onyx px-4">
       <form
         onSubmit={submit}
         className="w-full max-w-sm space-y-4 rounded-2xl border border-white/10 bg-charcoal p-6"
@@ -245,9 +245,28 @@ export default function Admin() {
   const { produtos, loading, uploadFoto, salvar, remover, toggle } = useAdmin();
   const [editando, setEditando] = useState(null);
 
+  // O painel é escuro (bg-onyx). Sem isto, o "rubber-band" de rolagem do
+  // celular — principalmente com o teclado aberto ao editar um produto —
+  // revela o fundo claro do <body> e uma faixa da tela aparece branca.
+  // Pintamos <html>/<body> de onyx enquanto o painel está montado.
+  useEffect(() => {
+    const root = document.documentElement;
+    const { backgroundColor: htmlAntes } = root.style;
+    const { backgroundColor: bodyAntes, overscrollBehavior: overAntes } =
+      document.body.style;
+    root.style.backgroundColor = "#0b0b0c";
+    document.body.style.backgroundColor = "#0b0b0c";
+    document.body.style.overscrollBehavior = "none";
+    return () => {
+      root.style.backgroundColor = htmlAntes;
+      document.body.style.backgroundColor = bodyAntes;
+      document.body.style.overscrollBehavior = overAntes;
+    };
+  }, []);
+
   if (!supabaseConfigurado) {
     return (
-      <div className="grid min-h-screen place-items-center bg-onyx px-6 text-center text-cream/60">
+      <div className="grid min-h-dvh place-items-center bg-onyx px-6 text-center text-cream/60">
         <div className="max-w-sm space-y-2">
           <p className="font-[var(--font-display)] text-lg uppercase tracking-wide text-gold-gradient">
             Painel indisponível
@@ -267,7 +286,7 @@ export default function Admin() {
 
   if (authLoading) {
     return (
-      <div className="grid min-h-screen place-items-center bg-onyx text-cream/40">
+      <div className="grid min-h-dvh place-items-center bg-onyx text-cream/40">
         Carregando...
       </div>
     );
@@ -276,7 +295,7 @@ export default function Admin() {
   if (!user) return <Login onEntrar={entrar} />;
 
   return (
-    <div className="min-h-screen bg-onyx text-cream">
+    <div className="min-h-dvh overscroll-none bg-onyx text-cream">
       <div className="mx-auto max-w-3xl px-4 py-6">
         <header className="flex items-center justify-between">
           <Link
